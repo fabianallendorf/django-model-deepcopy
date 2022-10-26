@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "django-model-deepcopy"
+version = "0.1.0"
+description = ""
+authors = ["fabianallendorf <fabian.allendorf@node.energy>"]
+readme = "README.md"
+packages = [{include = "django_model_deepcopy"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^4.1.2"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.10.0"
+isort = "^5.10.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
