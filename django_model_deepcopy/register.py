@@ -7,8 +7,8 @@ from django_model_deepcopy import model_helper
 
 @dataclasses.dataclass(frozen=True)
 class CopyableModelOptions:
-    fields: list[str] = dataclasses.field(default_factory=list)
-    exclude: list[str] = dataclasses.field(default_factory=list)
+    fields: list[models.Field] = dataclasses.field(default_factory=list)
+    exclude: list[models.Field] = dataclasses.field(default_factory=list)
 
 
 class CopyableModelRegister:
@@ -18,10 +18,23 @@ class CopyableModelRegister:
     def register(self, model: type[models.Model], options: CopyableModelOptions | None = None):
         if options is not None:
             RegisterValidator.validate_options(model, options)
-        self._registry[model] = options or CopyableModelOptions()
+            self._registry[model] = options
+        else:
+            fields = self._get_all_model_fields(model)
+            self._registry[model] = CopyableModelOptions(fields=fields, exclude=[])
 
     def unregister(self, model: type[models.Model]):
         del self._registry[model]
+
+    def is_registered(self, model: type[models.Model]) -> bool:
+        return model in self._registry
+
+    def get_options(self, model: type[models.Model]) -> CopyableModelOptions:
+        return self._registry[model]
+
+    @staticmethod
+    def _get_all_model_fields(model: type[models.Model]) -> list[models.Field]:
+        return model._meta.get_fields(include_parents=True, include_hidden=True)
 
 
 class RegisterValidator:
