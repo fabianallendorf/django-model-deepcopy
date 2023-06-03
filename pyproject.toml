@@ -28,3 +28,6 @@ include = ["django_model_deepcopy", "tests"]
 pythonVersion = "3.10.5"
 venvPath = "/Users/fabianallendorf/Library/Caches/pypoetry/virtualenvs/"
 venv = "django-model-deepcopy-hASS0c1I-py3.10"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "django_model_deepcopy.settings.test"
