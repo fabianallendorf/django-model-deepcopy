@@ -41,8 +41,8 @@ class RegisterValidator:
     @staticmethod
     def validate_options(model: type[models.Model], options: CopyableModelOptions):
         for field in options.fields + options.exclude:
-            if not model_helper.has_field(model, field):
-                raise ValueError(f"Model '{model}' does not have field '{field}'")
+            if not model_helper.has_field(model, field.name):
+                raise ValueError(f"Model '{model}' does not have field '{field.name}'")
 
 
 register = CopyableModelRegister()
