@@ -9,6 +9,7 @@ packages = [{include = "django_model_deepcopy"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 Django = "^4.1.2"
+pillow = "^9.5.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -18,6 +19,7 @@ pytest = "^7.2.0"
 factory-boy = "^3.2.1"
 pytest-django = "^4.5.2"
 pyright = "^1.1.310"
+faker = "^18.10.1"
 
 [build-system]
 requires = ["poetry-core"]
